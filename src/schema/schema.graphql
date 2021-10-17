@@ -1,0 +1,35 @@
+input PokemonInput {
+    name: String!
+    pokedexNo: Int!
+}
+
+type Box {
+    id: ID!
+    name: String!
+}
+
+type BoxContent {
+    id: ID!
+    pokemons: [Pokemon!]!
+}
+
+type Pokemon {
+    id: ID!
+    name: String!
+    pokedexNo: Int!
+}
+
+type Query {
+    box(id: ID!): BoxContent!
+    boxes: [Box!]!
+}
+
+type Mutation {
+    deposit(pokemon: PokemonInput!): Pokemon
+    move(
+        from: ID!
+        to: ID!
+        pokemonId: ID!
+    ): String
+    withdraw(pokemonId: ID!): Pokemon
+}
