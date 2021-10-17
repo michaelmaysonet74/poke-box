@@ -1,20 +1,23 @@
+scalar BoxId
+scalar PokemonId
+
 input PokemonInput {
     name: String!
     pokedexNo: Int!
 }
 
 type Box {
-    id: ID!
+    id: BoxId!
     name: String!
 }
 
 type BoxContent {
-    id: ID!
+    id: BoxId!
     pokemons: [Pokemon!]!
 }
 
 type Pokemon {
-    id: ID!
+    id: PokemonId!
     name: String!
     pokedexNo: Int!
 }
@@ -25,11 +28,14 @@ type Query {
 }
 
 type Mutation {
-    deposit(pokemon: PokemonInput!): Pokemon
+    deposit(
+        pokemon: PokemonInput!
+        to: BoxId!
+    ): Pokemon
     move(
-        from: ID!
-        to: ID!
-        pokemonId: ID!
+        from: BoxId!
+        to: BoxId!
+        pokemonId: PokemonId!
     ): String
-    withdraw(pokemonId: ID!): Pokemon
+    withdraw(pokemonId: PokemonId!): Pokemon
 }
